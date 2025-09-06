@@ -6,9 +6,9 @@ parts:
     chapters:
       - file: Lectures/lecture1
 
-  - caption: Labs
+  - caption: Laboratories
     chapters:
-      - file: Labs/lab1
+      - file: Laboratories/lab1
 
   - caption: Projects
     chapters:
