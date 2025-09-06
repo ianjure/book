@@ -1,9 +1,15 @@
-# Table of contents
-# Learn more at https://jupyterbook.org/customize/toc.html
-
 format: jb-book
 root: intro
-chapters:
-- file: markdown
-- file: notebooks
-- file: markdown-notebooks
+
+parts:
+  - caption: Lectures
+    chapters:
+      - file: Lectures/lecture1
+
+  - caption: Labs
+    chapters:
+      - file: Labs/lab1
+
+  - caption: Projects
+    chapters:
+      - file: Projects/project1
