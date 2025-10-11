@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Project Task 1 &#8212; Portfolio - Ian Jure Macalisang</title>
+    <title>Project 1 &#8212; Jupyter Book</title>
   
   
   
@@ -152,8 +152,8 @@
       
     
     
-    <img src="../_static/logo.png" class="logo__image only-light" alt="Portfolio - Ian Jure Macalisang - Home"/>
-    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Portfolio - Ian Jure Macalisang - Home"/>`);</script>
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Jupyter Book - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Jupyter Book - Home"/>`);</script>
   
   
 </a></div>
@@ -189,7 +189,7 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Projects</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Project Task 1</strong></a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Project 1</strong></a></li>
 </ul>
 
     </div>
@@ -373,7 +373,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Project Task 1</h1>
+    <h1>Project 1</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -387,10 +387,292 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="project-task-1">
-<h1><strong>Project Task 1</strong><a class="headerlink" href="#project-task-1" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="project-1">
+<h1><strong>Project 1</strong><a class="headerlink" href="#project-1" title="Link to this heading">#</a></h1>
 <hr class="docutils" />
-<br></section>
+<p><strong>Simple Art Restoration with U-Net</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch.nn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nn</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch.optim</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">optim</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torchvision.transforms</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">transforms</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torchvision.datasets</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">datasets</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torch.utils.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataLoader</span><span class="p">,</span> <span class="n">Dataset</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.patches</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">patches</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span><span class="w"> </span><span class="nn">torch.nn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nn</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span><span class="w"> </span><span class="nn">torch.optim</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">optim</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;torch&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Step 1: Define a Tiny U-Net</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">DoubleConv</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">in_channels</span><span class="p">,</span> <span class="n">out_channels</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="n">in_channels</span><span class="p">,</span> <span class="n">out_channels</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="n">out_channels</span><span class="p">,</span> <span class="n">out_channels</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">UNet</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">in_channels</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">out_channels</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span> <span class="c1"># [64, 64, 3]</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">down1</span> <span class="o">=</span> <span class="n">DoubleConv</span><span class="p">(</span><span class="n">in_channels</span><span class="p">,</span> <span class="mi">64</span><span class="p">)</span> <span class="c1"># [64, 64, 64]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pool1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">MaxPool2d</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># [32, 32, 64]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">down2</span> <span class="o">=</span> <span class="n">DoubleConv</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">128</span><span class="p">)</span> <span class="c1"># [32, 32, 128]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pool2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">MaxPool2d</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># [16, 16, 128]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">bottleneck</span> <span class="o">=</span> <span class="n">DoubleConv</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">256</span><span class="p">)</span> <span class="c1"># [16, 16, 256]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">up2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">ConvTranspose2d</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">stride</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># [32, 32, 128 + 128]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dec2</span> <span class="o">=</span> <span class="n">DoubleConv</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="mi">128</span><span class="p">)</span> <span class="c1"># [32, 32, 128]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">up1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">ConvTranspose2d</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">stride</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># [64, 64, 64 + 64]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dec1</span> <span class="o">=</span> <span class="n">DoubleConv</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">64</span><span class="p">)</span> <span class="c1"># [64, 64, 64]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">final</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="n">out_channels</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="c1"># [64, 64, 3]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="c1"># Encoder: downsampling path (extract features, lose some detail)</span>
+        <span class="n">d1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">down1</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">p1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pool1</span><span class="p">(</span><span class="n">d1</span><span class="p">)</span>
+        <span class="n">d2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">down2</span><span class="p">(</span><span class="n">p1</span><span class="p">)</span>
+        <span class="n">p2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pool2</span><span class="p">(</span><span class="n">d2</span><span class="p">)</span>
+
+        <span class="c1"># Bottleneck: compressed global representation</span>
+        <span class="n">bn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bottleneck</span><span class="p">(</span><span class="n">p2</span><span class="p">)</span>
+
+        <span class="c1"># Decoder: upsampling path (reconstruct image)</span>
+        <span class="n">u2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">up2</span><span class="p">(</span><span class="n">bn</span><span class="p">)</span>
+        <span class="n">cat2</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">u2</span><span class="p">,</span> <span class="n">d2</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Skip Connection: bring back mid-level details</span>
+        <span class="n">d2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dec2</span><span class="p">(</span><span class="n">cat2</span><span class="p">)</span>
+
+        <span class="n">u1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">up1</span><span class="p">(</span><span class="n">d2</span><span class="p">)</span>
+        <span class="n">cat1</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">u1</span><span class="p">,</span> <span class="n">d1</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Skip Connection: bring back fine details (edges, brushstrokes)</span>
+        <span class="n">d1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dec1</span><span class="p">(</span><span class="n">cat1</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">final</span><span class="p">(</span><span class="n">d1</span><span class="p">)</span>  <span class="c1"># Output: restored image</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Step 2: Prepare the Dataset</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">DamagedDataset</span><span class="p">(</span><span class="n">Dataset</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">train</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="n">transform</span> <span class="o">=</span> <span class="n">transforms</span><span class="o">.</span><span class="n">Compose</span><span class="p">([</span>
+            <span class="n">transforms</span><span class="o">.</span><span class="n">Resize</span><span class="p">((</span><span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">)),</span>
+            <span class="n">transforms</span><span class="o">.</span><span class="n">ToTensor</span><span class="p">()</span>
+        <span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">CIFAR10</span><span class="p">(</span><span class="n">root</span><span class="o">=</span><span class="s2">&quot;./data&quot;</span><span class="p">,</span> <span class="n">train</span><span class="o">=</span><span class="n">train</span><span class="p">,</span>
+                                     <span class="n">transform</span><span class="o">=</span><span class="n">transform</span><span class="p">,</span> <span class="n">download</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_damage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">img</span><span class="p">):</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+
+        <span class="n">C</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">W</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span>
+
+        <span class="c1"># Block damage</span>
+        <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">:</span>
+            <span class="n">block_size</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">24</span><span class="p">)</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">W</span> <span class="o">-</span> <span class="n">block_size</span><span class="p">)</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">H</span> <span class="o">-</span> <span class="n">block_size</span><span class="p">)</span>
+            <span class="n">img</span><span class="p">[:,</span> <span class="n">y</span><span class="p">:</span><span class="n">y</span><span class="o">+</span><span class="n">block_size</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="o">+</span><span class="n">block_size</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">img</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span><span class="n">y</span><span class="o">+</span><span class="n">block_size</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="o">+</span><span class="n">block_size</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">img</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span><span class="n">y</span><span class="o">+</span><span class="n">block_size</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="o">+</span><span class="n">block_size</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">img</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span><span class="n">y</span><span class="o">+</span><span class="n">block_size</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="o">+</span><span class="n">block_size</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">mask</span><span class="p">[:,</span> <span class="n">y</span><span class="p">:</span><span class="n">y</span><span class="o">+</span><span class="n">block_size</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="o">+</span><span class="n">block_size</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+        <span class="c1"># Streaks / scratches</span>
+        <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">:</span>
+            <span class="n">num_streaks</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_streaks</span><span class="p">):</span>
+                <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">W</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">H</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+                <span class="n">length</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+                <span class="n">angle</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">length</span><span class="p">):</span>
+                    <span class="n">xi</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">x1</span> <span class="o">+</span> <span class="n">i</span><span class="p">)</span>
+                    <span class="n">yi</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">y1</span> <span class="o">+</span> <span class="n">i</span><span class="o">*</span><span class="n">angle</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">xi</span> <span class="o">&lt;</span> <span class="n">W</span> <span class="ow">and</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">yi</span> <span class="o">&lt;</span> <span class="n">H</span><span class="p">:</span>
+                        <span class="n">img</span><span class="p">[:,</span> <span class="n">yi</span><span class="p">,</span> <span class="n">xi</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+                        <span class="n">img</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">yi</span><span class="p">,</span> <span class="n">xi</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+                        <span class="n">img</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">yi</span><span class="p">,</span> <span class="n">xi</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+                        <span class="n">img</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="n">yi</span><span class="p">,</span> <span class="n">xi</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+                        <span class="n">mask</span><span class="p">[:,</span> <span class="n">yi</span><span class="p">,</span> <span class="n">xi</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">img</span><span class="p">,</span> <span class="n">mask</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">):</span>
+        <span class="n">clean</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+        <span class="n">damaged</span><span class="p">,</span> <span class="n">mask</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_damage</span><span class="p">(</span><span class="n">clean</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">damaged</span><span class="p">,</span> <span class="n">clean</span><span class="p">,</span> <span class="n">mask</span>
+
+<span class="n">train_dataset</span> <span class="o">=</span> <span class="n">DamagedDataset</span><span class="p">(</span><span class="n">train</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">train_loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">train_dataset</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 170M/170M [00:06&lt;00:00, 27.8MB/s]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Step 3: Training</span>
+
+<span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s2">&quot;cpu&quot;</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">UNet</span><span class="p">()</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<span class="n">criterion</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">MSELoss</span><span class="p">()</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Training started...&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">damaged</span><span class="p">,</span> <span class="n">clean</span><span class="p">,</span> <span class="n">mask</span> <span class="ow">in</span> <span class="n">train_loader</span><span class="p">:</span>
+        <span class="n">damaged</span><span class="p">,</span> <span class="n">clean</span> <span class="o">=</span> <span class="n">damaged</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">clean</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">damaged</span><span class="p">)</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">criterion</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">clean</span><span class="p">)</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+        <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Epoch </span><span class="si">{</span><span class="n">epoch</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">: Loss = </span><span class="si">{</span><span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training started...
+Epoch 1: Loss = 0.0004
+Epoch 2: Loss = 0.0005
+Epoch 3: Loss = 0.0006
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Helper to add black border</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">add_black_border</span><span class="p">(</span><span class="n">img_tensor</span><span class="p">,</span> <span class="n">border</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">bordered</span> <span class="o">=</span> <span class="n">img_tensor</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
+    <span class="n">C</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">W</span> <span class="o">=</span> <span class="n">bordered</span><span class="o">.</span><span class="n">shape</span>
+
+    <span class="c1"># Top and bottom</span>
+    <span class="n">bordered</span><span class="p">[:,</span> <span class="p">:</span><span class="n">border</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">bordered</span><span class="p">[:,</span> <span class="n">H</span><span class="o">-</span><span class="n">border</span><span class="p">:,</span> <span class="p">:]</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="c1"># Left and right</span>
+    <span class="n">bordered</span><span class="p">[:,</span> <span class="p">:,</span> <span class="p">:</span><span class="n">border</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">bordered</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">W</span><span class="o">-</span><span class="n">border</span><span class="p">:]</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">return</span> <span class="n">bordered</span>
+
+<span class="c1"># Step 4: Visualization</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">show_images</span><span class="p">(</span><span class="n">damaged</span><span class="p">,</span> <span class="n">restored</span><span class="p">,</span> <span class="n">clean</span><span class="p">,</span> <span class="n">masks</span><span class="p">,</span> <span class="n">n_samples</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+    <span class="n">stages</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Damaged&#39;</span><span class="p">,</span> <span class="s1">&#39;AI Patch&#39;</span><span class="p">,</span> <span class="s1">&#39;Restored&#39;</span><span class="p">,</span> <span class="s1">&#39;Original&#39;</span><span class="p">]</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">n_samples</span><span class="p">),</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_samples</span><span class="p">):</span>
+        <span class="c1"># Damaged input</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">add_black_border</span><span class="p">(</span><span class="n">damaged</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">cpu</span><span class="p">(),</span> <span class="n">border</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">n_samples</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">i</span><span class="o">*</span><span class="mi">4</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">)),</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;upper&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Damaged&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+
+        <span class="c1"># AI Patch (true restored colors)</span>
+        <span class="n">canvas</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">restored</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">cpu</span><span class="p">())</span>
+        <span class="n">canvas</span> <span class="o">=</span> <span class="n">canvas</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">masks</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">cpu</span><span class="p">())</span> <span class="o">+</span> <span class="n">restored</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span> <span class="o">*</span> <span class="n">masks</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span>
+        <span class="n">canvas</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="n">canvas</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">canvas</span> <span class="o">=</span> <span class="n">add_black_border</span><span class="p">(</span><span class="n">canvas</span><span class="p">,</span> <span class="n">border</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">n_samples</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">i</span><span class="o">*</span><span class="mi">4</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">canvas</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">)),</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;upper&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;AI Patch&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Restored output</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">add_black_border</span><span class="p">(</span><span class="n">restored</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">cpu</span><span class="p">(),</span> <span class="n">border</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">n_samples</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">i</span><span class="o">*</span><span class="mi">4</span> <span class="o">+</span> <span class="mi">3</span><span class="p">)</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">)),</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;upper&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Restored&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Original ground truth</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">add_black_border</span><span class="p">(</span><span class="n">clean</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">cpu</span><span class="p">(),</span> <span class="n">border</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">n_samples</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">i</span><span class="o">*</span><span class="mi">4</span> <span class="o">+</span> <span class="mi">4</span><span class="p">)</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">)),</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;upper&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Original&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Test on a few samples</span>
+<span class="n">test_dataset</span> <span class="o">=</span> <span class="n">DamagedDataset</span><span class="p">(</span><span class="n">train</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">damaged</span><span class="p">,</span> <span class="n">clean</span><span class="p">,</span> <span class="n">masks</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">test_dataset</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)])</span>
+<span class="n">damaged</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">damaged</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<span class="n">clean</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">clean</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<span class="n">masks</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">masks</span><span class="p">)</span>
+
+<span class="n">restored</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">damaged</span><span class="p">)</span>
+
+<span class="n">show_images</span><span class="p">(</span><span class="n">damaged</span><span class="p">,</span> <span class="n">restored</span><span class="p">,</span> <span class="n">clean</span><span class="p">,</span> <span class="n">masks</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/60dff0cfcd5a2657e6823e27003aa9646004ca1f8e301bd959591d152461bb3f.png" src="../_images/60dff0cfcd5a2657e6823e27003aa9646004ca1f8e301bd959591d152461bb3f.png" />
+</div>
+</div>
+<p><a class="reference download internal" download="" href="../_downloads/ce2954ec857cf861ef33043220ab0114/report.pdf"><span class="xref download myst">Download the Report (PDF)</span></a></p>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -447,7 +729,7 @@ document.write(`
   <div class="footer-item">
     
 <p class="component-author">
-By The Jupyter Book Community
+By Ian Jure Macalisang
 </p>
 
   </div>
@@ -457,7 +739,7 @@ By The Jupyter Book Community
 
   <p class="copyright">
     
-      © Copyright 2023.
+      © Copyright 2025, Ian Jure Macalisang.
       <br/>
     
   </p>

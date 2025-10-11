@@ -2,21 +2,15 @@
 
 📞 09453183638 | 📧 [ianjure.data@gmail.com](mailto:ianjure.data@gmail.com) | 🌐 [github.com/ianjure](https://github.com/ianjure)
 
-<br>
-
 ## Summary
 
 Detail-oriented problem solver with extensive experience in Python and ML/AI model development. Proficient in CI/CD, Git workflows, system design, full-stack development, cloud computing, and automation.
-
-<br>
 
 ## Education
 
 **B.S. in Data Science**  
 _University of Science and Technology of Southern Philippines_  
 📅 Expected Graduation: **June 2026**
-
-<br>
 
 ## Group Projects
 
@@ -48,8 +42,6 @@ _University of Science and Technology of Southern Philippines_
 -   Implemented land use and land cover prediction model using CA-ANN in QGIS via MOLUSCE.
 -   Co-authored the methodology and analysis sections for the research paper.
 
-<br>
-
 ## Leadership and Activities
 
 -   **PhilDev Foundation** – YBLL Participant
@@ -57,7 +49,7 @@ _University of Science and Technology of Southern Philippines_
 -   **Capstone Principal Researcher**
 -   **AWS Cloud Clubs** – Technical Officer
 
-<br>
+## Table of Contents
 
 ```{tableofcontents}
 
