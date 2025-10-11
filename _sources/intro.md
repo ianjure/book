@@ -1,5 +1,6 @@
-# Ian Jure E. Macalisang
+# Welcome to my Jupyter Book!
 
+**Ian Jure E. Macalisang**
 09453183638 | [ianjure.data@gmail.com](mailto:ianjure.data@gmail.com) | [github.com/ianjure](https://github.com/ianjure)
 
 ## **Summary**
