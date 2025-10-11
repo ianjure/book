@@ -21,3 +21,6 @@ venv/
 # OS-specific
 .DS_Store
 Thumbs.db
+
+# Github
+.github/
