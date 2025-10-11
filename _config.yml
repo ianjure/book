@@ -1,8 +1,9 @@
 # Book settings
 # Learn more at https://jupyterbook.org/customize/config.html
 
-title: Portfolio - Ian Jure Macalisang
-author: The Jupyter Book Community
+title: Jupyter Book
+author: Ian Jure Macalisang
+copyright: "2025, Ian Jure Macalisang"
 logo: logo.png
 
 # Force re-execution of notebooks on each build.
