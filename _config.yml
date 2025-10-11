@@ -4,7 +4,7 @@
 title: Jupyter Book
 author: Ian Jure Macalisang
 copyright: "2025, Ian Jure Macalisang"
-logo: logo.png
+logo: logo.jpg
 
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
