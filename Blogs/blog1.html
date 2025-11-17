@@ -396,12 +396,12 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-dropout">🎲 <strong>What Is Dropout?</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dropout-during-training-vs-inference">🧠 <strong>Dropout During Training vs. Inference</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inverted-dropout-the-modern-trick-everyone-uses">🔄 <strong>Inverted Dropout (The Modern Trick Everyone Uses)</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-dropout-works-and-how-its-different-from-other-regularization">🌳 <strong>Why Dropout Works (and How It’s Different from Other Regularization)</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-use-dropout-correctly">⚙️ <strong>How to Use Dropout Correctly</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pytorch-dropout-demo-on-mnist">✅ <strong>PyTorch Dropout Demo on MNIST</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-dropout"><strong>What Is Dropout?</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dropout-during-training-vs-inference"><strong>Dropout During Training vs. Inference</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inverted-dropout-the-modern-trick-everyone-uses"><strong>Inverted Dropout (The Modern Trick Everyone Uses)</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-dropout-works-and-how-its-different-from-other-regularization"><strong>Why Dropout Works (and How It’s Different from Other Regularization)</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-use-dropout-correctly"><strong>How to Use Dropout Correctly</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pytorch-dropout-demo-on-mnist"><strong>PyTorch Dropout Demo on MNIST</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#in-summary"><strong>In Summary</strong></a></li>
 </ul>
             </nav>
@@ -420,7 +420,7 @@ document.write(`
 <p>When training a deep learning model, certain neurons can become overly influential. This creates a risk of <strong>overfitting</strong>, where the model performs extremely well during training but poorly during testing. In this situation, neurons in the next layer may rely too heavily on specific neurons from the previous layer instead of learning from <em>all</em> of them.</p>
 <p>This is where <strong>dropout</strong> comes in.</p>
 <section id="what-is-dropout">
-<h2>🎲 <strong>What Is Dropout?</strong><a class="headerlink" href="#what-is-dropout" title="Link to this heading">#</a></h2>
+<h2><strong>What Is Dropout?</strong><a class="headerlink" href="#what-is-dropout" title="Link to this heading">#</a></h2>
 <p>In simple terms, <strong>dropout randomly turns off some neurons during training</strong>. Each training pass (epoch or batch) uses a slightly different version of the network because a different subset of neurons is active.</p>
 <p>Think of it like flipping a coin for each neuron:</p>
 <ul class="simple">
@@ -440,7 +440,7 @@ document.write(`
 <strong>Dropout slows learning</strong>—the higher the dropout rate, the slower the convergence.</p>
 </section>
 <section id="dropout-during-training-vs-inference">
-<h2>🧠 <strong>Dropout During Training vs. Inference</strong><a class="headerlink" href="#dropout-during-training-vs-inference" title="Link to this heading">#</a></h2>
+<h2><strong>Dropout During Training vs. Inference</strong><a class="headerlink" href="#dropout-during-training-vs-inference" title="Link to this heading">#</a></h2>
 <p>A key detail: <br />
 <strong>Dropout is used only during training</strong>, not during inference.</p>
 <p>During testing or deployment, all neurons are active. But to make sure the output distribution matches what the model saw during training, we need to adjust the neuron weights.</p>
@@ -450,7 +450,7 @@ document.write(`
 <p>This ensures that the expected output during inference matches the average output during training.</p>
 </section>
 <section id="inverted-dropout-the-modern-trick-everyone-uses">
-<h2>🔄 <strong>Inverted Dropout (The Modern Trick Everyone Uses)</strong><a class="headerlink" href="#inverted-dropout-the-modern-trick-everyone-uses" title="Link to this heading">#</a></h2>
+<h2><strong>Inverted Dropout (The Modern Trick Everyone Uses)</strong><a class="headerlink" href="#inverted-dropout-the-modern-trick-everyone-uses" title="Link to this heading">#</a></h2>
 <p>Most neural network libraries today use <strong>inverted dropout</strong>, which simplifies inference.</p>
 <p>Here’s what happens:</p>
 <ol class="arabic">
@@ -483,7 +483,7 @@ The model becomes fully deterministic, which is exactly what we want.</p></li>
 </ol>
 </section>
 <section id="why-dropout-works-and-how-its-different-from-other-regularization">
-<h2>🌳 <strong>Why Dropout Works (and How It’s Different from Other Regularization)</strong><a class="headerlink" href="#why-dropout-works-and-how-its-different-from-other-regularization" title="Link to this heading">#</a></h2>
+<h2><strong>Why Dropout Works (and How It’s Different from Other Regularization)</strong><a class="headerlink" href="#why-dropout-works-and-how-its-different-from-other-regularization" title="Link to this heading">#</a></h2>
 <p>Dropout forms <strong>many tiny subnetworks</strong>, each trained with slightly different active neurons. This is somewhat similar to training multiple decision trees in an ensemble.</p>
 <p>Unlike other regularization techniques:</p>
 <ul class="simple">
@@ -495,7 +495,7 @@ The model becomes fully deterministic, which is exactly what we want.</p></li>
 <p>Each subnetwork learns something slightly different, and together they create a strong, generalized model.</p>
 </section>
 <section id="how-to-use-dropout-correctly">
-<h2>⚙️ <strong>How to Use Dropout Correctly</strong><a class="headerlink" href="#how-to-use-dropout-correctly" title="Link to this heading">#</a></h2>
+<h2><strong>How to Use Dropout Correctly</strong><a class="headerlink" href="#how-to-use-dropout-correctly" title="Link to this heading">#</a></h2>
 <p>Here are the practical tips:</p>
 <p><strong>✔ Choose an appropriate dropout rate</strong></p>
 <ul class="simple">
@@ -513,7 +513,7 @@ The model becomes fully deterministic, which is exactly what we want.</p></li>
 <p>Stops training before overfitting kicks in—saving both time and compute.</p>
 </section>
 <section id="pytorch-dropout-demo-on-mnist">
-<h2>✅ <strong>PyTorch Dropout Demo on MNIST</strong><a class="headerlink" href="#pytorch-dropout-demo-on-mnist" title="Link to this heading">#</a></h2>
+<h2><strong>PyTorch Dropout Demo on MNIST</strong><a class="headerlink" href="#pytorch-dropout-demo-on-mnist" title="Link to this heading">#</a></h2>
 <p><strong>1. Imports</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -791,12 +791,12 @@ Runtime (Dropout): 59.06 sec
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-dropout">🎲 <strong>What Is Dropout?</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dropout-during-training-vs-inference">🧠 <strong>Dropout During Training vs. Inference</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inverted-dropout-the-modern-trick-everyone-uses">🔄 <strong>Inverted Dropout (The Modern Trick Everyone Uses)</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-dropout-works-and-how-its-different-from-other-regularization">🌳 <strong>Why Dropout Works (and How It’s Different from Other Regularization)</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-use-dropout-correctly">⚙️ <strong>How to Use Dropout Correctly</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pytorch-dropout-demo-on-mnist">✅ <strong>PyTorch Dropout Demo on MNIST</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-dropout"><strong>What Is Dropout?</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dropout-during-training-vs-inference"><strong>Dropout During Training vs. Inference</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inverted-dropout-the-modern-trick-everyone-uses"><strong>Inverted Dropout (The Modern Trick Everyone Uses)</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-dropout-works-and-how-its-different-from-other-regularization"><strong>Why Dropout Works (and How It’s Different from Other Regularization)</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-use-dropout-correctly"><strong>How to Use Dropout Correctly</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pytorch-dropout-demo-on-mnist"><strong>PyTorch Dropout Demo on MNIST</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#in-summary"><strong>In Summary</strong></a></li>
 </ul>
   </nav></div>
