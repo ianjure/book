@@ -26,10 +26,6 @@ jobs:
 
             - name: Build the book
               run: |
-                  echo "Current directory:"
-                  pwd
-                  echo "Listing contents:"
-                  ls -R .
                   jupyter-book build .
 
             - name: Deploy to GitHub Pages
