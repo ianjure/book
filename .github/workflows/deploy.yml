@@ -32,13 +32,6 @@ jobs:
                   ls -R .
                   jupyter-book build .
 
-            - name: Debug — Show directory structure
-              run: |
-                  pwd
-                  ls -R .
-                  echo "Checking _build folder:"
-                  ls -R _build || echo "_build DOES NOT EXIST"
-
             - name: Deploy to GitHub Pages
               uses: peaceiris/actions-gh-pages@v3
               with:

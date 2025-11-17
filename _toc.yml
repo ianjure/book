@@ -4,18 +4,17 @@ root: intro
 parts:
     - caption: Lectures
       chapters:
-          - file: Lectures/lecture1
+          - file: Lectures/lecture1.ipynb
 
     - caption: Laboratories
       chapters:
-          - file: Laboratories/laboratory1
-          - file: Laboratories/laboratory2
-          - file: Laboratories/laboratory3
-          - file: Laboratories/laboratory4
-          - file: Laboratories/laboratory5
-          - file: Laboratories/laboratory6
-
+          - file: Laboratories/laboratory1.ipynb
+          - file: Laboratories/laboratory2.ipynb
+          - file: Laboratories/laboratory3.ipynb
+          - file: Laboratories/laboratory4.ipynb
+          - file: Laboratories/laboratory5.ipynb
+          - file: Laboratories/laboratory6.ipynb
     - caption: Projects
       chapters:
-          - file: Projects/project1
-          - file: Projects/project2
+          - file: Projects/project1.ipynb
+          - file: Projects/project2.ipynb
