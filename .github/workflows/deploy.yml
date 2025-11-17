@@ -22,7 +22,7 @@ jobs:
             - name: Install dependencies
               run: |
                   pip install -U pip
-                  pip install jupyter-book
+                  pip install jupyter-book==1.0.4.post1
 
             - name: Build the book
               run: |
