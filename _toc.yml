@@ -5,15 +5,28 @@ parts:
     - caption: Lectures
       chapters:
           - file: Lectures/lecture1.ipynb
+            title: Lecture 1
     - caption: Laboratories
       chapters:
           - file: Laboratories/laboratory1.ipynb
+            title: Laboratory 1
           - file: Laboratories/laboratory2.ipynb
+            title: Laboratory 2
           - file: Laboratories/laboratory3.ipynb
+            title: Laboratory 3
           - file: Laboratories/laboratory4.ipynb
+            title: Laboratory 4
           - file: Laboratories/laboratory5.ipynb
+            title: Laboratory 5
           - file: Laboratories/laboratory6.ipynb
+            title: Laboratory 6
     - caption: Projects
       chapters:
           - file: Projects/project1.ipynb
+            title: Project 1
           - file: Projects/project2.ipynb
+            title: Project 2
+    - caption: Blogs
+      chapters:
+          - file: Blogs/blog1.ipynb
+            title: Blog 1
