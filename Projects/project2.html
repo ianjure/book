@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Project 2 &#8212; Jupyter Book</title>
+    <title>EQODEC: A Carbon-Aware Deep Learning Framework for Sustainable Video Compression &#8212; Jupyter Book</title>
   
   
   
@@ -60,7 +60,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'Projects/project2';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="Project 1" href="project1.html" />
+    <link rel="next" title="Sometimes It’s Okay to Forget Stuff (Understanding Dropout in Neural Networks)" href="../Blogs/blog1.html" />
+    <link rel="prev" title="Simple Art Restoration with U-Net" href="project1.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -180,21 +181,25 @@
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lectures</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../Lectures/lecture1.html"><strong>Lecture Task 1</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Lectures/lecture1.html">Lecture 1</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Laboratories</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../Laboratories/laboratory1.html"><strong>Laboratory Task 1</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Laboratories/laboratory2.html"><strong>Laboratory Task 2</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Laboratories/laboratory3.html"><strong>Laboratory Task 3</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Laboratories/laboratory4.html"><strong>Laboratory Task 4</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Laboratories/laboratory5.html"><strong>Laboratory Task 5</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Laboratories/laboratory6.html"><strong>Laboratory Task 6</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Laboratories/laboratory1.html">Laboratory 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Laboratories/laboratory2.html">Laboratory 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Laboratories/laboratory3.html">Laboratory 3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Laboratories/laboratory4.html">Laboratory 4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Laboratories/laboratory5.html">Laboratory 5</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Laboratories/laboratory6.html">Laboratory 6</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Projects</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="project1.html"><strong>Project 1</strong></a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Project 2</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="project1.html">Project 1</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Project 2</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Blogs</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Blogs/blog1.html">Blog 1</a></li>
 </ul>
 
     </div>
@@ -378,7 +383,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Project 2</h1>
+    <h1>EQODEC: A Carbon-Aware Deep Learning Framework for Sustainable Video Compression</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -392,10 +397,9 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="project-2">
-<h1><strong>Project 2</strong><a class="headerlink" href="#project-2" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="eqodec-a-carbon-aware-deep-learning-framework-for-sustainable-video-compression">
+<h1><strong>EQODEC: A Carbon-Aware Deep Learning Framework for Sustainable Video Compression</strong><a class="headerlink" href="#eqodec-a-carbon-aware-deep-learning-framework-for-sustainable-video-compression" title="Link to this heading">#</a></h1>
 <hr class="docutils" />
-<p><strong>EQODEC: A Carbon-Aware Deep Learning Framework for Sustainable Video Compression</strong></p>
 <p><strong>Background</strong></p>
 <p>The rapid expansion of online video services has made video data the single largest contributor to global internet traffic, accounting for more than 80% of all transmitted information (Digital Age, 2023). This surge in demand has placed immense pressure on data centers, which consume massive amounts of energy to store, process, and deliver video content. As a result, the video streaming industry has become a significant source of carbon emissions, contributing to the environmental footprint of digital technologies (Afzal et al., 2024; The Shift Project, 2019).</p>
 <p>Traditional codecs such as H.264 and H.265 have achieved impressive compression ratios through handcrafted engineering, yet they are approaching their practical limits, particularly as high-resolution formats (4K, 8K, VR) become mainstream (ImageKit, 2022). Recent advances in deep learning have opened new possibilities for neural video compression, where models such as autoencoders, GANs, and transformers learn to compress data by discovering efficient latent representations (Chen et al., 2024). However, most of these approaches prioritize reconstruction quality and bitrate efficiency, without explicitly considering their environmental impact (MIT News, 2025).</p>
@@ -457,8 +461,17 @@ document.write(`
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><strong>Project 1</strong></p>
+        <p class="prev-next-title"><strong>Simple Art Restoration with U-Net</strong></p>
       </div>
+    </a>
+    <a class="right-next"
+       href="../Blogs/blog1.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><strong>Sometimes It’s Okay to Forget Stuff (Understanding Dropout in Neural Networks)</strong></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
