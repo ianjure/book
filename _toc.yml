@@ -5,7 +5,6 @@ parts:
     - caption: Lectures
       chapters:
           - file: Lectures/lecture1.ipynb
-
     - caption: Laboratories
       chapters:
           - file: Laboratories/laboratory1.ipynb
