@@ -20,6 +20,8 @@ parts:
             title: Laboratory 5
           - file: Laboratories/laboratory6.ipynb
             title: Laboratory 6
+          - file: Laboratories/laboratory7.ipynb
+            title: Laboratory 7
     - caption: Projects
       chapters:
           - file: Projects/project1.ipynb
