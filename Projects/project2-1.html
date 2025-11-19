@@ -377,7 +377,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -393,6 +395,16 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#background"><strong>Background</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objectives"><strong>Objectives</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#significance"><strong>Significance</strong></a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -405,18 +417,26 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="eqodec-a-carbon-aware-deep-learning-framework-for-sustainable-video-compression">
 <h1><strong>EQODEC: A Carbon-Aware Deep Learning Framework for Sustainable Video Compression</strong><a class="headerlink" href="#eqodec-a-carbon-aware-deep-learning-framework-for-sustainable-video-compression" title="Link to this heading">#</a></h1>
 <hr class="docutils" />
-<p><strong>Background</strong></p>
+<section id="background">
+<h2><strong>Background</strong><a class="headerlink" href="#background" title="Link to this heading">#</a></h2>
 <p>The rapid expansion of online video services has made video data the single largest contributor to global internet traffic, accounting for more than 80% of all transmitted information (Digital Age, 2023). This surge in demand has placed immense pressure on data centers, which consume massive amounts of energy to store, process, and deliver video content. As a result, the video streaming industry has become a significant source of carbon emissions, contributing to the environmental footprint of digital technologies (Afzal et al., 2024; The Shift Project, 2019).</p>
 <p>Traditional codecs such as H.264 and H.265 have achieved impressive compression ratios through handcrafted engineering, yet they are approaching their practical limits, particularly as high-resolution formats (4K, 8K, VR) become mainstream (ImageKit, 2022). Recent advances in deep learning have opened new possibilities for neural video compression, where models such as autoencoders, GANs, and transformers learn to compress data by discovering efficient latent representations (Chen et al., 2024). However, most of these approaches prioritize reconstruction quality and bitrate efficiency, without explicitly considering their environmental impact (MIT News, 2025).</p>
 <p>This project introduces EQODEC or the Energy-Quality Optimized Codec, a carbon-aware deep learning framework designed to make video compression both intelligent and sustainable. Unlike traditional methods, EQODEC integrates environmental cost metrics—including estimated energy use and CO₂ emissions—directly into its learning objective. By jointly optimizing for reconstruction quality, bitrate reduction, and sustainability, the model aims to reduce data center load and network energy consumption. This approach aligns with global initiatives in Green AI, promoting computational efficiency and environmental responsibility in deep learning applications (Freitag et al., 2021; Goldverg et al., 2024).</p>
-<p><strong>Objectives</strong></p>
+<hr class="docutils" />
+</section>
+<section id="objectives">
+<h2><strong>Objectives</strong><a class="headerlink" href="#objectives" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p>Design a carbon-aware video compression framework that balances efficiency and environmental impact.</p></li>
 <li><p>Develop an end-to-end deep learning model with an energy-aware loss to encourage eco-friendly compression.</p></li>
 <li><p>Evaluate compression quality, bitrate efficiency, and carbon footprint, comparing against conventional and neural codecs.</p></li>
 </ol>
-<p><strong>Significance</strong></p>
+<hr class="docutils" />
+</section>
+<section id="significance">
+<h2><strong>Significance</strong><a class="headerlink" href="#significance" title="Link to this heading">#</a></h2>
 <p>EQODEC distinguishes itself from existing deep learning–based video compression research by embedding carbon-awareness directly into the optimization process. Traditional neural codecs focus solely on minimizing bitrate and reconstruction error, inadvertently ignoring the environmental cost of their operations. This project pioneers a multi-objective optimization strategy that balances visual fidelity with energy efficiency, introducing a sustainability-driven loss component. Additionally, the model will produce a novel Energy Efficiency Score (EES)—a metric that estimates the real-world energy and carbon savings achieved per gigabyte of video compressed. Through this integration of sustainability metrics into model design, EQODEC contributes a forward-looking, environmentally responsible framework for future video technologies.</p>
+<hr class="docutils" />
 <p><strong>References</strong></p>
 <ul class="simple">
 <li><p>Afzal, S., et al. (2024). <a class="reference external" href="https://arxiv.org/abs/2401.09854"><em>A Survey on Energy Consumption and Environmental Impact of Video Streaming.</em></a></p></li>
@@ -429,6 +449,7 @@ document.write(`
 <li><p>The Shift Project. (2019). <a class="reference external" href="https://theshiftproject.org/app/uploads/2025/04/Press-kit_Climate-crisis_The-unsustainable-use-of-online-video.pdf"><em>THE UNSUSTAINABLE USE OF ONLINE VIDEO.</em></a></p></li>
 </ul>
 </section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -439,16 +460,16 @@ document.write(`
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: "eqodec"
         },
         kernelOptions: {
-            name: "python3",
+            name: "eqodec",
             path: "./Projects"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = 'eqodec'</script>
 
                 </article>
               
@@ -484,6 +505,23 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#background"><strong>Background</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objectives"><strong>Objectives</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#significance"><strong>Significance</strong></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
