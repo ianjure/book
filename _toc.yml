@@ -25,7 +25,12 @@ parts:
           - file: Projects/project1.ipynb
             title: Project 1
           - file: Projects/project2.ipynb
-            title: Project 2
+            title: Final Project
+            sections:
+                - file: Projects/project2-1.ipynb
+                  title: Week 1
+                - file: Projects/project2-2.ipynb
+                  title: Week 2
     - caption: Blogs
       chapters:
           - file: Blogs/blog1.ipynb
