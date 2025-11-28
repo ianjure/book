@@ -33,6 +33,8 @@ parts:
                   title: Week 1
                 - file: Projects/project2-2.ipynb
                   title: Week 2
+                - file: Projects/project2-3.ipynb
+                  title: Week 3
     - caption: Blogs
       chapters:
           - file: Blogs/blog1.ipynb
