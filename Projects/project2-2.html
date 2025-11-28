@@ -60,7 +60,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'Projects/project2-2';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Sometimes It’s Okay to Forget Stuff (Understanding Dropout in Neural Networks)" href="../Blogs/blog1.html" />
+    <link rel="next" title="EQODEC: A Carbon-Aware Deep Learning Framework for Sustainable Video Compression" href="project2-3.html" />
     <link rel="prev" title="EQODEC: A Carbon-Aware Deep Learning Framework for Sustainable Video Compression" href="project2-1.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -199,6 +199,7 @@
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="project2.html">Final Project</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="project2-1.html">Week 1</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Week 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="project2-3.html">Week 3</a></li>
 </ul>
 </details></li>
 </ul>
@@ -417,7 +418,7 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="eqodec-a-carbon-aware-deep-learning-framework-for-sustainable-video-compression">
 <h1><strong>EQODEC: A Carbon-Aware Deep Learning Framework for Sustainable Video Compression</strong><a class="headerlink" href="#eqodec-a-carbon-aware-deep-learning-framework-for-sustainable-video-compression" title="Link to this heading">#</a></h1>
 <hr class="docutils" />
-<p>A core component of our EQODEC framework is the careful selection and structured preparation of training and benchmarking datasets. Because EQODEC aims to balance reconstruction quality with environmental efficiency, we require datasets that provide both the scale needed for deep representation learning and the diversity necessary to evaluate reconstruction fidelity across modern video formats. Two dedicated notebooks—<code class="docutils literal notranslate"><span class="pre">01_data_collection.ipynb</span></code> and <code class="docutils literal notranslate"><span class="pre">02_data_preprocessing.ipynb</span></code>—outline how we acquired and prepared these datasets.</p>
+<p>A core component of our EQODEC framework is the careful selection and structured preparation of training and benchmarking datasets. Because EQODEC aims to balance reconstruction quality with environmental efficiency, we require datasets that provide both the scale needed for deep representation learning and the diversity necessary to evaluate reconstruction fidelity across modern video formats. Two dedicated notebooks: <code class="docutils literal notranslate"><span class="pre">01_data_collection.ipynb</span></code> and <code class="docutils literal notranslate"><span class="pre">02_data_preprocessing.ipynb</span></code> outline how we acquired and prepared these datasets.</p>
 <section id="data-collection">
 <h2><strong>Data Collection</strong><a class="headerlink" href="#data-collection" title="Link to this heading">#</a></h2>
 <p><strong>Rationale for Dataset Selection</strong></p>
@@ -430,7 +431,7 @@ document.write(`
 <p>Each dataset plays a critical role: Vimeo-90K supports learning temporal and spatial redundancy, while UVG challenges our model with high-resolution, high-entropy content typical of real-world video applications.</p>
 <p><strong>Training Dataset: Vimeo-90K (Septuplet)</strong></p>
 <p>We selected the <strong>Vimeo-90K Septuplet dataset</strong> as the main training source due to its extensive archive of aligned seven-frame sequences. With <strong>91,701 septuplets</strong>, each at a fixed resolution of <strong>448 × 256 pixels</strong>, the dataset provides enough volume and consistency for stable training.</p>
-<p>The temporal coherence across each septuplet allows our model to learn temporal redundancies essential for motion compensation—an important mechanism for reducing bitrate while maintaining perceptual quality.</p>
+<p>The temporal coherence across each septuplet allows our model to learn temporal redundancies essential for motion compensation, an important mechanism for reducing bitrate while maintaining perceptual quality.</p>
 <p>Because this dataset is only available through manual download, we obtained the Septuplet package from the authors’ site and placed it into our project under <code class="docutils literal notranslate"><span class="pre">data/raw/vimeo/sequences</span></code>.</p>
 <p><strong>Benchmarking Dataset: Ultra Video Group (UVG)</strong></p>
 <p>To benchmark EQODEC meaningfully against traditional codecs such as H.264 and H.265, we required a dataset that presents substantial compression challenges. We therefore selected the <strong>UVG dataset</strong>, which contains <strong>1920×1080 Full HD videos</strong>, often recorded at <strong>high framerates (up to 120 fps)</strong>.</p>
@@ -454,10 +455,10 @@ document.write(`
 </section>
 <section id="data-preprocessing">
 <h2><strong>Data Preprocessing</strong><a class="headerlink" href="#data-preprocessing" title="Link to this heading">#</a></h2>
-<p>In the next stage of preparation, implemented in <strong>02_data_preprocessing.ipynb</strong>, we focused on generating an efficient and lightweight subset of the Vimeo-90K dataset. Given its size (≈82GB), training on the entire dataset is computationally expensive and environmentally intensive. To reduce overhead, we opted to retain only <strong>10% of the sequences</strong>, sampled randomly but deterministically.</p>
+<p>In the next stage of preparation, implemented in <strong>02_data_preprocessing.ipynb</strong>, we focused on generating an efficient and lightweight subset of the Vimeo-90K dataset. Given its size (≈82GB), training on the entire dataset is computationally expensive and environmentally intensive. To reduce overhead, we opted to retain only <strong>1% of the sequences</strong>, sampled randomly but deterministically.</p>
 <p><strong>Subsetting the Dataset</strong></p>
 <p>Our preprocessing script begins by scanning the Vimeo directory and identifying all valid seven-frame sequences. After gathering the full list, we apply a deterministic shuffle using a fixed random seed (42). This ensures that subsequent experiments can be replicated exactly.</p>
-<p>We then apply a <strong>sample ratio of 0.10</strong>, reducing the dataset size while keeping representative variability in motion and scene content.</p>
+<p>We then apply a <strong>sample ratio of 0.01</strong>, reducing the dataset size while keeping representative variability in motion and scene content.</p>
 <p><strong>Train/Validation Split</strong></p>
 <p>After forming the reduced subset, we split it into <strong>Training (90%)</strong> and <strong>Validation (10%)</strong> sets. We apply a deterministic split index to ensure that the same samples are consistently assigned to each set across multiple runs. This split allows us to train EQODEC effectively while monitoring generalization performance on unseen sequences.</p>
 <p><strong>Saving Split Indices</strong></p>
@@ -515,11 +516,11 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="../Blogs/blog1.html"
+       href="project2-3.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><strong>Sometimes It’s Okay to Forget Stuff (Understanding Dropout in Neural Networks)</strong></p>
+        <p class="prev-next-title"><strong>EQODEC: A Carbon-Aware Deep Learning Framework for Sustainable Video Compression</strong></p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

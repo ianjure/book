@@ -57,11 +57,11 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'Projects/project2';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Projects/project2-3';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="EQODEC: A Carbon-Aware Deep Learning Framework for Sustainable Video Compression" href="project2-1.html" />
-    <link rel="prev" title="Simple Art Restoration with U-Net" href="project1.html" />
+    <link rel="next" title="Sometimes It’s Okay to Forget Stuff (Understanding Dropout in Neural Networks)" href="../Blogs/blog1.html" />
+    <link rel="prev" title="EQODEC: A Carbon-Aware Deep Learning Framework for Sustainable Video Compression" href="project2-2.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -196,10 +196,10 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Projects</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="project1.html">Project 1</a></li>
-<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Final Project</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="project2.html">Final Project</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="project2-1.html">Week 1</a></li>
 <li class="toctree-l2"><a class="reference internal" href="project2-2.html">Week 2</a></li>
-<li class="toctree-l2"><a class="reference internal" href="project2-3.html">Week 3</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Week 3</a></li>
 </ul>
 </details></li>
 </ul>
@@ -277,7 +277,7 @@
       
       
       
-      <li><a href="https://github.com/ianjure/book/issues/new?title=Issue%20on%20page%20%2FProjects/project2.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/ianjure/book/issues/new?title=Issue%20on%20page%20%2FProjects/project2-3.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -307,7 +307,7 @@
       
       
       
-      <li><a href="../_sources/Projects/project2.ipynb" target="_blank"
+      <li><a href="../_sources/Projects/project2-3.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -378,7 +378,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -394,6 +396,18 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-training-pipeline-improvements"><strong>Model Training Pipeline Improvements</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#performance-optimization-and-runtime-stability"><strong>Performance Optimization and Runtime Stability</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training-progress-and-checkpointing"><strong>Training Progress and Checkpointing</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ees-computation-and-uvg-benchmark"><strong>EES Computation and UVG Benchmark</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary"><strong>Summary</strong></a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -406,31 +420,132 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="eqodec-a-carbon-aware-deep-learning-framework-for-sustainable-video-compression">
 <h1><strong>EQODEC: A Carbon-Aware Deep Learning Framework for Sustainable Video Compression</strong><a class="headerlink" href="#eqodec-a-carbon-aware-deep-learning-framework-for-sustainable-video-compression" title="Link to this heading">#</a></h1>
 <hr class="docutils" />
-<p><strong>Background</strong></p>
-<p>The rapid expansion of online video services has made video data the single largest contributor to global internet traffic, accounting for more than 80% of all transmitted information (Digital Age, 2023). This surge in demand has placed immense pressure on data centers, which consume massive amounts of energy to store, process, and deliver video content. As a result, the video streaming industry has become a significant source of carbon emissions, contributing to the environmental footprint of digital technologies (Afzal et al., 2024; The Shift Project, 2019).</p>
-<p>Traditional codecs such as H.264 and H.265 have achieved impressive compression ratios through handcrafted engineering, yet they are approaching their practical limits, particularly as high-resolution formats (4K, 8K, VR) become mainstream (ImageKit, 2022). Recent advances in deep learning have opened new possibilities for neural video compression, where models such as autoencoders, GANs, and transformers learn to compress data by discovering efficient latent representations (Chen et al., 2024). However, most of these approaches prioritize reconstruction quality and bitrate efficiency, without explicitly considering their environmental impact (MIT News, 2025).</p>
-<p>This project introduces EQODEC or the Energy-Quality Optimized Codec, a carbon-aware deep learning framework designed to make video compression both intelligent and sustainable. Unlike traditional methods, EQODEC integrates environmental cost metrics—including estimated energy use and CO₂ emissions—directly into its learning objective. By jointly optimizing for reconstruction quality, bitrate reduction, and sustainability, the model aims to reduce data center load and network energy consumption. This approach aligns with global initiatives in Green AI, promoting computational efficiency and environmental responsibility in deep learning applications (Freitag et al., 2021; Goldverg et al., 2024).</p>
-<p><strong>Objectives</strong></p>
+<p>This week marked the transition from data preparation to the full training and evaluation phase of EQODEC, our carbon-aware deep learning framework for sustainable video compression. Building on previously completed data collection and preprocessing workflows where Vimeo-90K septuplets and UVG videos were properly indexed and organized, the focus shifted toward finalizing the training pipeline, integrating the carbon-aware components, and optimizing the computational efficiency of the entire system.</p>
+<p>The week’s efforts concentrated on three major fronts:</p>
 <ol class="arabic simple">
-<li><p>Design a carbon-aware video compression framework that balances efficiency and environmental impact.</p></li>
-<li><p>Develop an end-to-end deep learning model with an energy-aware loss to encourage eco-friendly compression.</p></li>
-<li><p>Evaluate compression quality, bitrate efficiency, and carbon footprint, comparing against conventional and neural codecs.</p></li>
+<li><p>Stabilizing and enhancing the EQODEC autoencoder training loop</p></li>
+<li><p>Implementing high-fidelity evaluation methods, including EES computation</p></li>
+<li><p>Improving runtime efficiency using AMP and ffmpeg streaming optimizations</p></li>
 </ol>
-<p><strong>Significance</strong></p>
-<p>EQODEC distinguishes itself from existing deep learning–based video compression research by embedding carbon-awareness directly into the optimization process. Traditional neural codecs focus solely on minimizing bitrate and reconstruction error, inadvertently ignoring the environmental cost of their operations. This project pioneers a multi-objective optimization strategy that balances visual fidelity with energy efficiency, introducing a sustainability-driven loss component. Additionally, the model will produce a novel Energy Efficiency Score (EES)—a metric that estimates the real-world energy and carbon savings achieved per gigabyte of video compressed. Through this integration of sustainability metrics into model design, EQODEC contributes a forward-looking, environmentally responsible framework for future video technologies.</p>
-<p><strong>References</strong></p>
+<p>These advancements move the project closer to fulfilling EQODEC’s vision of balancing reconstruction quality, compression efficiency, and environmental impact as outlined in the Week-1 background document.</p>
+<section id="model-training-pipeline-improvements">
+<h2><strong>Model Training Pipeline Improvements</strong><a class="headerlink" href="#model-training-pipeline-improvements" title="Link to this heading">#</a></h2>
+<p><strong>Final Integration of the ConvLSTM Autoencoder</strong></p>
+<p>The ConvLSTM-based autoencoder which learns both spatial and temporal redundancies from the Vimeo-90K septuplets was fully integrated into the training loop. The model now performs:</p>
 <ul class="simple">
-<li><p>Afzal, S., et al. (2024). <a class="reference external" href="https://arxiv.org/abs/2401.09854"><em>A Survey on Energy Consumption and Environmental Impact of Video Streaming.</em></a></p></li>
-<li><p>Chen, J., et al. (2024). <a class="reference external" href="https://arxiv.org/abs/2410.10733"><em>Deep Compression Autoencoder for Efficient High-Resolution Diffusion Models.</em></a></p></li>
-<li><p>Digital Age. (2023). <a class="reference external" href="https://newdigitalage.co/general/how-does-digital-video-consumption-contribute-to-the-global-carbon-footprint/"><em>How does digital video consumption contribute to the  global carbon footprint?</em></a></p></li>
-<li><p>Freitag, C., et al. (2021). <a class="reference external" href="https://arxiv.org/abs/2102.02622"><em>The climate impact of ICT: A review of estimates, trends and regulations.</em></a></p></li>
-<li><p>Goldverg, J., et al. (2024). <a class="reference external" href="https://arxiv.org/abs/2406.09650"><em>Carbon-Aware End-to-End Data Movement.</em></a></p></li>
-<li><p>ImageKit. (2022). <a class="reference external" href="https://imagekit.io/blog/h264-vs-h265/"><em>H.264 Vs. H.265: An analytical breakdown of video streaming codecs.</em></a></p></li>
-<li><p>MIT News. (2025). <a class="reference external" href="https://news.mit.edu/2025/explained-generative-ai-environmental-impact-0117"><em>Explained: Generative AI’s environmental impact.</em></a></p></li>
-<li><p>The Shift Project. (2019). <a class="reference external" href="https://theshiftproject.org/app/uploads/2025/04/Press-kit_Climate-crisis_The-unsustainable-use-of-online-video.pdf"><em>THE UNSUSTAINABLE USE OF ONLINE VIDEO.</em></a></p></li>
+<li><p>Frame-level spatial encoding</p></li>
+<li><p>Temporal modeling via ConvLSTM</p></li>
+<li><p>Latent quantization via a custom rounding module</p></li>
+<li><p>Two-stage decoding back to RGB reconstruction</p></li>
 </ul>
-<div class="toctree-wrapper compound">
+<p>This pipeline was successfully tested end-to-end using the preprocessed 7-frame sequences prepared last week.</p>
+<p><strong>Clean Separation of Reconstruction and Carbon Losses</strong></p>
+<p>A major architectural clean-up was completed:</p>
+<ul class="simple">
+<li><p>The <strong>Reconstruction + BPP Loss</strong> now contains no carbon-related terms.</p></li>
+<li><p>The <strong>CarbonModule</strong> is fully standalone, responsible only for computing a latent-level carbon proxy and managing CodeCarbon trackers.</p></li>
+</ul>
+<p>This separation improves experimental flexibility, enabling future testing of different carbon-aware weighting strategies without disturbing core reconstruction logic.</p>
+<p><strong>Incorporation of Carbon-Aware Loss During Training</strong></p>
+<p>The training loop now computes the total loss as:</p>
+<p><em>Loss = MSE Reconstruction Loss + λ₍c₎ · Carbon Proxy</em></p>
+<p>Where:</p>
+<ul class="simple">
+<li><p>λ₍c₎ is currently set to 0.05.</p></li>
+<li><p>Carbon proxy = mean absolute latent magnitude × carbon intensity.</p></li>
+</ul>
+<p>This aligns directly with Objective #2 in the Week-1 project background:
+<em>Develop an end-to-end model with an energy-aware loss to encourage eco-friendly compression.</em></p>
+<hr class="docutils" />
+</section>
+<section id="performance-optimization-and-runtime-stability">
+<h2><strong>Performance Optimization and Runtime Stability</strong><a class="headerlink" href="#performance-optimization-and-runtime-stability" title="Link to this heading">#</a></h2>
+<p><strong>Automatic Mixed Precision (AMP)</strong></p>
+<p>To reduce GPU time and energy use, PyTorch AMP was integrated throughout:</p>
+<ul class="simple">
+<li><p>Training now uses <code class="docutils literal notranslate"><span class="pre">autocast()</span></code> and <code class="docutils literal notranslate"><span class="pre">GradScaler</span></code>.</p></li>
+<li><p>Inference phases inside the UVG evaluation also leverage AMP.</p></li>
+</ul>
+<p>The result is:</p>
+<ul class="simple">
+<li><p>Lower memory consumption</p></li>
+<li><p>Faster step times</p></li>
+<li><p>Reduced energy usage (aligning with EQODEC’s sustainability goals)</p></li>
+</ul>
+<p><strong>Improved FFmpeg-Based Streaming I/O</strong></p>
+<p>The EES and evaluation pipeline required robust streaming of 1080p frames from UVG videos. This week introduced:</p>
+<ul class="simple">
+<li><p>New streaming reader using ffmpeg rawvideo pipe</p></li>
+<li><p>Stderr flushing logic to prevent ffmpeg stalls</p></li>
+<li><p>Chunk-based inference to avoid GPU OOM during resolution mismatch</p></li>
+<li><p>Real-time frame-level progress logging</p></li>
+</ul>
+<p>These fixes resolved earlier issues where evaluation appeared “stuck” due to silent ffmpeg buffering.</p>
+<hr class="docutils" />
+</section>
+<section id="training-progress-and-checkpointing">
+<h2><strong>Training Progress and Checkpointing</strong><a class="headerlink" href="#training-progress-and-checkpointing" title="Link to this heading">#</a></h2>
+<p><strong>Full Training Runs</strong></p>
+<p>The training loop was executed with:</p>
+<ul class="simple">
+<li><p>2 epochs (test configuration)</p></li>
+<li><p>Adam optimizer (LR = 1e-4)</p></li>
+<li><p>Batch size 4 (Vimeo septuplets)</p></li>
+</ul>
+<p>Both <strong>training and validation PSNR and loss metrics</strong> are now consistently logged per epoch.</p>
+<p>When validation loss improved, the model automatically saved:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">eqodec_best_epochX</span><span class="o">.</span><span class="n">pth</span>
+</pre></div>
 </div>
+<p>This ensures traceability and reproducibility of experiment results.</p>
+<p><strong>Baseline Model Training</strong></p>
+<p>The training loop was executed with:</p>
+<ul class="simple">
+<li><p>2 epochs (test configuration)</p></li>
+<li><p>Adam optimizer (LR = 1e-4)</p></li>
+<li><p>Batch size 4 (Vimeo septuplets)</p></li>
+</ul>
+<p>To prepare for comparative evaluation, a <strong>baseline MSE-only autoencoder</strong> was also trained:</p>
+<ul class="simple">
+<li><p>No carbon proxy</p></li>
+<li><p>Same architecture and hyperparameters</p></li>
+</ul>
+<p>This enables direct comparison of:</p>
+<ul class="simple">
+<li><p>Reconstruction quality</p></li>
+<li><p>Bitrate performance</p></li>
+<li><p>Carbon footprint</p></li>
+<li><p>Final EES scores</p></li>
+</ul>
+<p>as required in Objectives #2 and #3 of the EQODEC plan.</p>
+<hr class="docutils" />
+</section>
+<section id="ees-computation-and-uvg-benchmark">
+<h2><strong>EES Computation and UVG Benchmark</strong><a class="headerlink" href="#ees-computation-and-uvg-benchmark" title="Link to this heading">#</a></h2>
+<p><strong>Energy Efficiency Score (EES)</strong></p>
+<p>A major achievement this week was the <strong>successful deployment of the EES evaluator</strong>, which combines:</p>
+<ul class="simple">
+<li><p>Baseline H.264 encoding</p></li>
+<li><p>Model-based reconstruction encoding</p></li>
+<li><p>CodeCarbon-tracked emissions</p></li>
+<li><p>Time-proportional attribution of energy cost</p></li>
+<li><p>Storage size comparison</p></li>
+</ul>
+<p>EES expresses <strong>kgCO₂ saved per GB of compressed video</strong>, fulfilling the project’s requirement to produce a sustainability-oriented metric.</p>
+<p><strong>UVG Benchmark (PSNR)</strong></p>
+<p>A refined evaluation loop now:</p>
+<ul class="simple">
+<li><p>Streams UVG 1080p videos</p></li>
+<li><p>Runs chunk-based inference</p></li>
+<li><p>Computes PSNR over full sequences</p></li>
+</ul>
+<p>This high-resolution benchmark is directly connected to the data collection design in Week-1, where UVG was selected for its realism relative to traditional codecs’ limits.</p>
+<hr class="docutils" />
+</section>
+<section id="summary">
+<h2><strong>Summary</strong><a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<p>This week’s progress focused on fully stabilizing and optimizing the EQODEC model training pipeline, enabling end-to-end carbon-aware video compression using the Vimeo-90K and UVG datasets. The ConvLSTM autoencoder was successfully integrated with a clean reconstruction–carbon loss formulation, while a standalone CarbonModule ensured flexible computation of the sustainability objective introduced in the project background. Major performance improvements were achieved through Automatic Mixed Precision (AMP), ffmpeg-based streaming optimizations, and chunked 1080p inference, resulting in faster, more energy-efficient training and evaluation. Full training of both the EQODEC model and the MSE-only baseline was completed, with automatic checkpointing and consistent PSNR tracking. Additionally, the Energy Efficiency Score (EES) evaluator and UVG benchmark were fully operational, enabling realistic high-resolution testing and carbon-footprint assessment. Overall, this week established a stable, efficient, and carbon-aware training and evaluation workflow, marking a significant advancement toward EQODEC’s sustainability-centered objectives.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -442,16 +557,16 @@ document.write(`
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: "eqodec"
         },
         kernelOptions: {
-            name: "python3",
+            name: "eqodec",
             path: "./Projects"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = 'eqodec'</script>
 
                 </article>
               
@@ -464,20 +579,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="project1.html"
+       href="project2-2.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><strong>Simple Art Restoration with U-Net</strong></p>
+        <p class="prev-next-title"><strong>EQODEC: A Carbon-Aware Deep Learning Framework for Sustainable Video Compression</strong></p>
       </div>
     </a>
     <a class="right-next"
-       href="project2-1.html"
+       href="../Blogs/blog1.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><strong>EQODEC: A Carbon-Aware Deep Learning Framework for Sustainable Video Compression</strong></p>
+        <p class="prev-next-title"><strong>Sometimes It’s Okay to Forget Stuff (Understanding Dropout in Neural Networks)</strong></p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -487,6 +602,25 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-training-pipeline-improvements"><strong>Model Training Pipeline Improvements</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#performance-optimization-and-runtime-stability"><strong>Performance Optimization and Runtime Stability</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training-progress-and-checkpointing"><strong>Training Progress and Checkpointing</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ees-computation-and-uvg-benchmark"><strong>EES Computation and UVG Benchmark</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary"><strong>Summary</strong></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
