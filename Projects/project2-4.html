@@ -57,11 +57,11 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'Projects/project2-2';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Projects/project2-4';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="EQODEC: A Carbon-Aware Deep Learning Framework for Sustainable Video Compression" href="project2-3.html" />
-    <link rel="prev" title="EQODEC: A Carbon-Aware Deep Learning Framework for Sustainable Video Compression" href="project2-1.html" />
+    <link rel="next" title="Sometimes It’s Okay to Forget Stuff (Understanding Dropout in Neural Networks)" href="../Blogs/blog1.html" />
+    <link rel="prev" title="EQODEC: A Carbon-Aware Deep Learning Framework for Sustainable Video Compression" href="project2-3.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -198,9 +198,9 @@
 <li class="toctree-l1"><a class="reference internal" href="project1.html">Project 1</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="project2.html">Final Project</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="project2-1.html">Week 1</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Week 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="project2-2.html">Week 2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="project2-3.html">Week 3</a></li>
-<li class="toctree-l2"><a class="reference internal" href="project2-4.html">Week 4</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Week 4</a></li>
 </ul>
 </details></li>
 </ul>
@@ -278,7 +278,7 @@
       
       
       
-      <li><a href="https://github.com/ianjure/book/issues/new?title=Issue%20on%20page%20%2FProjects/project2-2.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/ianjure/book/issues/new?title=Issue%20on%20page%20%2FProjects/project2-4.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -308,7 +308,7 @@
       
       
       
-      <li><a href="../_sources/Projects/project2-2.ipynb" target="_blank"
+      <li><a href="../_sources/Projects/project2-4.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -402,8 +402,9 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-collection"><strong>Data Collection</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preprocessing"><strong>Data Preprocessing</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#initial-results"><strong>Initial Results</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tuning-and-training-observations"><strong>Tuning and Training Observations</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discussion-and-interpretation"><strong>Discussion and Interpretation</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary"><strong>Summary</strong></a></li>
 </ul>
             </nav>
@@ -419,61 +420,33 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="eqodec-a-carbon-aware-deep-learning-framework-for-sustainable-video-compression">
 <h1><strong>EQODEC: A Carbon-Aware Deep Learning Framework for Sustainable Video Compression</strong><a class="headerlink" href="#eqodec-a-carbon-aware-deep-learning-framework-for-sustainable-video-compression" title="Link to this heading">#</a></h1>
 <hr class="docutils" />
-<p>A core component of our EQODEC framework is the careful selection and structured preparation of training and benchmarking datasets. Because EQODEC aims to balance reconstruction quality with environmental efficiency, we require datasets that provide both the scale needed for deep representation learning and the diversity necessary to evaluate reconstruction fidelity across modern video formats. Two dedicated notebooks: <code class="docutils literal notranslate"><span class="pre">01_data_collection.ipynb</span></code> and <code class="docutils literal notranslate"><span class="pre">02_data_preprocessing.ipynb</span></code> outline how we acquired and prepared these datasets.</p>
-<section id="data-collection">
-<h2><strong>Data Collection</strong><a class="headerlink" href="#data-collection" title="Link to this heading">#</a></h2>
-<p><strong>Rationale for Dataset Selection</strong></p>
-<p>Our overarching objective in EQODEC is to learn compact latent representations that preserve visual fidelity while minimizing energy expenditure during compression and inference. Achieving this goal requires data that captures a wide spectrum of temporal dynamics, spatial textures, and scene complexities.</p>
-<p>To meet these requirements, we selected two complementary datasets:</p>
-<ol class="arabic simple">
-<li><p><strong>Vimeo-90K Septuplet</strong> — our primary training dataset.</p></li>
-<li><p><strong>Ultra Video Group (UVG)</strong> — our benchmarking dataset for evaluating reconstruction performance.</p></li>
-</ol>
-<p>Each dataset plays a critical role: Vimeo-90K supports learning temporal and spatial redundancy, while UVG challenges our model with high-resolution, high-entropy content typical of real-world video applications.</p>
-<p><strong>Training Dataset: Vimeo-90K (Septuplet)</strong></p>
-<p>We selected the <strong>Vimeo-90K Septuplet dataset</strong> as the main training source due to its extensive archive of aligned seven-frame sequences. With <strong>91,701 septuplets</strong>, each at a fixed resolution of <strong>448 × 256 pixels</strong>, the dataset provides enough volume and consistency for stable training.</p>
-<p>The temporal coherence across each septuplet allows our model to learn temporal redundancies essential for motion compensation, an important mechanism for reducing bitrate while maintaining perceptual quality.</p>
-<p>Because this dataset is only available through manual download, we obtained the Septuplet package from the authors’ site and placed it into our project under <code class="docutils literal notranslate"><span class="pre">data/raw/vimeo/sequences</span></code>.</p>
-<p><strong>Benchmarking Dataset: Ultra Video Group (UVG)</strong></p>
-<p>To benchmark EQODEC meaningfully against traditional codecs such as H.264 and H.265, we required a dataset that presents substantial compression challenges. We therefore selected the <strong>UVG dataset</strong>, which contains <strong>1920×1080 Full HD videos</strong>, often recorded at <strong>high framerates (up to 120 fps)</strong>.</p>
-<p>Sequences such as <em>HoneyBee</em>, <em>Jockey</em>, and <em>ShakeNDry</em> provide intricate textures and rapid motion, enabling us to assess both reconstruction quality and environmental efficiency under demanding conditions.</p>
-<p>We downloaded the sequences manually in Raw YUV format and stored them under <code class="docutils literal notranslate"><span class="pre">data/raw/uvg/</span></code>.</p>
-<p><strong>Directory Organization</strong></p>
-<p>To maintain clarity and ensure experimental reproducibility, we organized our dataset using a structured directory hierarchy. Raw videos and frames are stored separately from processed training assets such as split indices, enabling a clean and modular data pipeline.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>eqodec/
-├── notebooks/
-│   ├── 01_data_collection.ipynb
-│   ├── 02_data_preprocessing.ipynb
-└── data/
-    ├── raw/
-    │   ├── vimeo/
-    │   │   └── sequences/
-    │   └── uvg/
-    └── processed/
-</pre></div>
-</div>
+<p>This week marked a major milestone in the EQODEC project: the full integration of a three-way train/validation/test split, the implementation of robust multi-run evaluation, and the first comprehensive comparison between the EQODEC model and the baseline autoencoder under controlled experimental conditions. Building on the data acquisition and preprocessing work established earlier where Vimeo-90K was selected as the primary training dataset due to its temporally consistent septuplets and split into structured subsets for efficient experimentation, this week’s focus shifted toward evaluating model behavior under environmentally informed objectives.</p>
+<section id="initial-results">
+<h2><strong>Initial Results</strong><a class="headerlink" href="#initial-results" title="Link to this heading">#</a></h2>
+<p>After running five replicates per model, the results demonstrate that EQODEC slightly outperforms the baseline model, both in Energy Efficiency Score (EES) and in reconstruction quality (PSNR). While the improvements are modest, the key takeaway is that introducing carbon-awareness into the loss function does not degrade compression quality, an essential proof of concept for sustainability-aware machine learning. Moreover, the newly added test split ensures that all reported metrics reflect unbiased generalization performance, resolving earlier concerns about overfitting to the validation set.</p>
 <hr class="docutils" />
 </section>
-<section id="data-preprocessing">
-<h2><strong>Data Preprocessing</strong><a class="headerlink" href="#data-preprocessing" title="Link to this heading">#</a></h2>
-<p>In the next stage of preparation, implemented in <strong>02_data_preprocessing.ipynb</strong>, we focused on generating an efficient and lightweight subset of the Vimeo-90K dataset. Given its size (≈82GB), training on the entire dataset is computationally expensive and environmentally intensive. To reduce overhead, we opted to retain only <strong>1% of the sequences</strong>, sampled randomly but deterministically.</p>
-<p><strong>Subsetting the Dataset</strong></p>
-<p>Our preprocessing script begins by scanning the Vimeo directory and identifying all valid seven-frame sequences. After gathering the full list, we apply a deterministic shuffle using a fixed random seed (42). This ensures that subsequent experiments can be replicated exactly.</p>
-<p>We then apply a <strong>sample ratio of 0.01</strong>, reducing the dataset size while keeping representative variability in motion and scene content.</p>
-<p><strong>Train/Validation Split</strong></p>
-<p>After forming the reduced subset, we split it into <strong>Training (90%)</strong> and <strong>Validation (10%)</strong> sets. We apply a deterministic split index to ensure that the same samples are consistently assigned to each set across multiple runs. This split allows us to train EQODEC effectively while monitoring generalization performance on unseen sequences.</p>
-<p><strong>Saving Split Indices</strong></p>
-<p>To integrate smoothly with the training pipeline, we save the resulting indices as:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">train_split.json</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">val_split.json</span></code></p></li>
-</ul>
-<p>These files, stored under <code class="docutils literal notranslate"><span class="pre">data/processed/</span></code>, allow our training notebooks to load the dataset immediately without rescanning the raw directory. This reduces processing time and keeps the training workflow efficient and consistent.</p>
+<section id="tuning-and-training-observations">
+<h2><strong>Tuning and Training Observations</strong><a class="headerlink" href="#tuning-and-training-observations" title="Link to this heading">#</a></h2>
+<p>Several tuning changes played meaningful roles in this week’s improvements:</p>
+<p><strong>Local Carbon Intensity Estimation</strong>:
+The pipeline now queries CodeCarbon to obtain a dynamic estimate of regional carbon intensity before training. This allows λ₍c₎ to be interpreted consistently across different machines. This aligns with the environmental motivation outlined in the project’s background, where reducing energy and CO₂ impact is a central design goal.</p>
+<p><strong>Energy-Aware Loss Balancing</strong>:
+Using λ₍c₎ = 0.005 for EQODEC encouraged small but consistent reductions in latent magnitude, indicating the model is learning to embed energy efficiency into its representations.</p>
+<p><strong>Model Checkpointing via Validation Loss</strong>:
+Selecting the best-performing epoch per replicate contributed to reduced variance and stronger consistency across runs.</p>
+<p><strong>AMP + Chunked Inference</strong>:
+Mixed precision and chunk-level inference minimized unnecessary overhead during evaluation and supported more stable EES computations.</p>
+<hr class="docutils" />
+</section>
+<section id="discussion-and-interpretation">
+<h2><strong>Discussion and Interpretation</strong><a class="headerlink" href="#discussion-and-interpretation" title="Link to this heading">#</a></h2>
+<p>A practical challenge encountered this week was dataset selection for large-scale experimentation. While the original project proposal considered Vimeo-90K for training and UVG for high-resolution benchmarking, the UVG dataset stored in raw 1080p YUV format is computationally expensive to process, especially for neural models that perform temporal and spatial operations on every frame. Decoding and evaluating these long sequences would require multiple hours per run and exceed the available GPU memory, making frequent training and tuning cycles impractical. For this reason, we decided to use only the Vimeo-90K dataset for both experimentation and final benchmarking. This choice significantly reduces computational load, simplifies the pipeline, and ensures that EES and PSNR can be measured consistently across replicates. It also aligns with the project’s sustainability goals by prioritizing efficient experimentation without compromising the integrity of the comparative analysis.</p>
 <hr class="docutils" />
 </section>
 <section id="summary">
 <h2><strong>Summary</strong><a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
-<p>Together, our data collection and preprocessing stages establish a structured and reproducible pipeline tailored to the objectives of a carbon-aware deep learning framework. The <strong>Vimeo-90K Septuplet dataset</strong> provides the temporal structure required for learning efficient latent representations, while the <strong>UVG dataset</strong> supplies the challenging, high-resolution benchmarks needed to compare EQODEC with traditional codecs. Our preprocessing strategy further streamlines training by subsetting, splitting, and indexing the data, ensuring that we maintain both efficiency and experimental rigor in alignment with EQODEC’s environmental goals.</p>
+<p>Despite using Vimeo exclusively, the results still provide strong evidence that EQODEC’s carbon-aware objective does not harm performance and may even improve energy-aware compression efficiency. The modest but consistent gains in EES suggest that the model is responding to the sustainability signal but may require more advanced architectural mechanisms such as entropy coding, bottleneck restructuring, or dynamic λ₍c₎ scheduling, to achieve larger improvements.</p>
 </section>
 </section>
 
@@ -508,7 +481,7 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="project2-1.html"
+       href="project2-3.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
@@ -517,11 +490,11 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="project2-3.html"
+       href="../Blogs/blog1.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><strong>EQODEC: A Carbon-Aware Deep Learning Framework for Sustainable Video Compression</strong></p>
+        <p class="prev-next-title"><strong>Sometimes It’s Okay to Forget Stuff (Understanding Dropout in Neural Networks)</strong></p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -541,8 +514,9 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-collection"><strong>Data Collection</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preprocessing"><strong>Data Preprocessing</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#initial-results"><strong>Initial Results</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tuning-and-training-observations"><strong>Tuning and Training Observations</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discussion-and-interpretation"><strong>Discussion and Interpretation</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary"><strong>Summary</strong></a></li>
 </ul>
   </nav></div>
