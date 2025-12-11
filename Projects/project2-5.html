@@ -57,11 +57,11 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'Projects/project2-3';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Projects/project2-5';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="EQODEC: A Carbon-Aware Deep Learning Framework for Sustainable Video Compression" href="project2-4.html" />
-    <link rel="prev" title="EQODEC: A Carbon-Aware Deep Learning Framework for Sustainable Video Compression" href="project2-2.html" />
+    <link rel="next" title="Sometimes It’s Okay to Forget Stuff (Understanding Dropout in Neural Networks)" href="../Blogs/blog1.html" />
+    <link rel="prev" title="EQODEC: A Carbon-Aware Deep Learning Framework for Sustainable Video Compression" href="project2-4.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -199,9 +199,9 @@
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="project2.html">Final Project</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="project2-1.html">Week 1</a></li>
 <li class="toctree-l2"><a class="reference internal" href="project2-2.html">Week 2</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Week 3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="project2-3.html">Week 3</a></li>
 <li class="toctree-l2"><a class="reference internal" href="project2-4.html">Week 4</a></li>
-<li class="toctree-l2"><a class="reference internal" href="project2-5.html">Week 5</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Week 5</a></li>
 </ul>
 </details></li>
 </ul>
@@ -279,7 +279,7 @@
       
       
       
-      <li><a href="https://github.com/ianjure/book/issues/new?title=Issue%20on%20page%20%2FProjects/project2-3.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/ianjure/book/issues/new?title=Issue%20on%20page%20%2FProjects/project2-5.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -309,7 +309,7 @@
       
       
       
-      <li><a href="../_sources/Projects/project2-3.ipynb" target="_blank"
+      <li><a href="../_sources/Projects/project2-5.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -403,10 +403,13 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-training-pipeline-improvements"><strong>Model Training Pipeline Improvements</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#performance-optimization-and-runtime-stability"><strong>Performance Optimization and Runtime Stability</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training-progress-and-checkpointing"><strong>Training Progress and Checkpointing</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ees-computation-and-uvg-benchmark"><strong>EES Computation and UVG Benchmark</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#finalization-of-the-end-to-end-eqodec-framework"><strong>Finalization of the End-to-End EQODEC Framework</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#full-implementation-of-the-robust-multi-run-evaluation-engine"><strong>Full Implementation of the Robust Multi-Run Evaluation Engine</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#refinement-of-the-ees-energy-efficiency-score-evaluation-pipeline"><strong>Refinement of the EES (Energy Efficiency Score) Evaluation Pipeline</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unified-vimeo-only-benchmarking-strategy"><strong>Unified Vimeo-Only Benchmarking Strategy</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualization-of-training-dynamics-and-sustainability-metrics"><strong>Visualization of Training Dynamics and Sustainability Metrics</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-contributions-frame-reconstruction-export-utility"><strong>Additional Contributions: Frame Reconstruction Export Utility</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#challenges-encountered"><strong>Challenges Encountered</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary"><strong>Summary</strong></a></li>
 </ul>
             </nav>
@@ -422,131 +425,110 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="eqodec-a-carbon-aware-deep-learning-framework-for-sustainable-video-compression">
 <h1><strong>EQODEC: A Carbon-Aware Deep Learning Framework for Sustainable Video Compression</strong><a class="headerlink" href="#eqodec-a-carbon-aware-deep-learning-framework-for-sustainable-video-compression" title="Link to this heading">#</a></h1>
 <hr class="docutils" />
-<p>This week marked the transition from data preparation to the full training and evaluation phase of EQODEC, our carbon-aware deep learning framework for sustainable video compression. Building on previously completed data collection and preprocessing workflows where Vimeo-90K septuplets and UVG videos were properly indexed and organized, the focus shifted toward finalizing the training pipeline, integrating the carbon-aware components, and optimizing the computational efficiency of the entire system.</p>
-<p>The week’s efforts concentrated on three major fronts:</p>
-<ol class="arabic simple">
-<li><p>Stabilizing and enhancing the EQODEC autoencoder training loop</p></li>
-<li><p>Implementing high-fidelity evaluation methods, including EES computation</p></li>
-<li><p>Improving runtime efficiency using AMP and ffmpeg streaming optimizations</p></li>
-</ol>
-<p>These advancements move the project closer to fulfilling EQODEC’s vision of balancing reconstruction quality, compression efficiency, and environmental impact as outlined in the Week-1 background document.</p>
-<section id="model-training-pipeline-improvements">
-<h2><strong>Model Training Pipeline Improvements</strong><a class="headerlink" href="#model-training-pipeline-improvements" title="Link to this heading">#</a></h2>
-<p><strong>Final Integration of the ConvLSTM Autoencoder</strong></p>
-<p>The ConvLSTM-based autoencoder which learns both spatial and temporal redundancies from the Vimeo-90K septuplets was fully integrated into the training loop. The model now performs:</p>
+<p>This week marks a significant consolidation phase in the EQODEC project, where the previously developed components in data preparation, model architecture, carbon-aware loss design, and early evaluation methods were unified into a complete, reproducible, and research-grade experimental framework. Building on the structured dataset workflows from Weeks 1–3 and the early training and EES development from Week 4, the focus this week was to fully operationalize the robust evaluation pipeline and establish a stable methodology for comparing EQODEC against the baseline model under carbon-aware objectives.</p>
+<p>Consistent with the pivot introduced in Week 4, the project now exclusively uses the Vimeo-90K dataset for both training and benchmarking, replacing earlier plans involving the UVG high-resolution dataset due to its high computational costs and carbon overhead. This decision not only simplified the pipeline but also strengthened alignment with EQODEC’s sustainability-driven objectives.</p>
+<section id="finalization-of-the-end-to-end-eqodec-framework">
+<h2><strong>Finalization of the End-to-End EQODEC Framework</strong><a class="headerlink" href="#finalization-of-the-end-to-end-eqodec-framework" title="Link to this heading">#</a></h2>
+<p>This week completed the transition from a prototype pipeline into a full experimental system capable of performing multi-run, multi-metric evaluation. The entire architecture including the ConvGRU-based autoencoder, quantization module, reconstruction engine, and carbon proxy was rewritten into a unified file to eliminate fragmentation, ensure reproducibility, and simplify debugging.</p>
+<p>This includes:</p>
 <ul class="simple">
-<li><p>Frame-level spatial encoding</p></li>
-<li><p>Temporal modeling via ConvLSTM</p></li>
-<li><p>Latent quantization via a custom rounding module</p></li>
-<li><p>Two-stage decoding back to RGB reconstruction</p></li>
+<li><p>A fully modular <strong>CarbonModule</strong>, responsible for carbon proxy computation and CodeCarbon instrumentation.</p></li>
+<li><p>A cleanly separated <strong>Recon+BPP loss</strong> versus <strong>carbon-aware loss</strong>, preserving experimental flexibility as emphasized in Week 3’s architectural refinements.</p></li>
+<li><p>A more stable <strong>encoder–temporal–decoder pipeline</strong>, replacing the earlier ConvLSTM with a lighter ConvGRU to reduce training cost and improve inference speed, consistent with the environmental motivation outlined in Week 1’s background.</p></li>
 </ul>
-<p>This pipeline was successfully tested end-to-end using the preprocessed 7-frame sequences prepared last week.</p>
-<p><strong>Clean Separation of Reconstruction and Carbon Losses</strong></p>
-<p>A major architectural clean-up was completed:</p>
-<ul class="simple">
-<li><p>The <strong>Reconstruction + BPP Loss</strong> now contains no carbon-related terms.</p></li>
-<li><p>The <strong>CarbonModule</strong> is fully standalone, responsible only for computing a latent-level carbon proxy and managing CodeCarbon trackers.</p></li>
-</ul>
-<p>This separation improves experimental flexibility, enabling future testing of different carbon-aware weighting strategies without disturbing core reconstruction logic.</p>
-<p><strong>Incorporation of Carbon-Aware Loss During Training</strong></p>
-<p>The training loop now computes the total loss as:</p>
-<p><em>Loss = MSE Reconstruction Loss + λ₍c₎ · Carbon Proxy</em></p>
-<p>Where:</p>
-<ul class="simple">
-<li><p>λ₍c₎ is currently set to 0.05.</p></li>
-<li><p>Carbon proxy = mean absolute latent magnitude × carbon intensity.</p></li>
-</ul>
-<p>This aligns directly with Objective #2 in the Week-1 project background:
-<em>Develop an end-to-end model with an energy-aware loss to encourage eco-friendly compression.</em></p>
+<p>Together, these improvements formed the final version of the EQODEC model used for all replicates this week.</p>
 <hr class="docutils" />
 </section>
-<section id="performance-optimization-and-runtime-stability">
-<h2><strong>Performance Optimization and Runtime Stability</strong><a class="headerlink" href="#performance-optimization-and-runtime-stability" title="Link to this heading">#</a></h2>
-<p><strong>Automatic Mixed Precision (AMP)</strong></p>
-<p>To reduce GPU time and energy use, PyTorch AMP was integrated throughout:</p>
+<section id="full-implementation-of-the-robust-multi-run-evaluation-engine">
+<h2><strong>Full Implementation of the Robust Multi-Run Evaluation Engine</strong><a class="headerlink" href="#full-implementation-of-the-robust-multi-run-evaluation-engine" title="Link to this heading">#</a></h2>
+<p>A major milestone was the successful construction of a fully automated robustness evaluation framework capable of:</p>
 <ul class="simple">
-<li><p>Training now uses <code class="docutils literal notranslate"><span class="pre">autocast()</span></code> and <code class="docutils literal notranslate"><span class="pre">GradScaler</span></code>.</p></li>
-<li><p>Inference phases inside the UVG evaluation also leverage AMP.</p></li>
+<li><p>Running <strong>N = 5 independent training replicates</strong> for both baseline and EQODEC models, as established in Week 4’s initial multi-run setup.</p></li>
+<li><p>Saving the <strong>best-performing model per replicate</strong> based on validation loss.</p></li>
+<li><p>Performing <strong>per-epoch EES computation</strong>, allowing temporal analysis of sustainability effects throughout training.</p></li>
+<li><p>Aggregating metrics across replicates and exporting structured JSON and CSV summaries.</p></li>
 </ul>
-<p>The result is:</p>
+<p>The final robustness engine computes mean, standard deviation, and per-run variance for key metrics:</p>
 <ul class="simple">
-<li><p>Lower memory consumption</p></li>
-<li><p>Faster step times</p></li>
-<li><p>Reduced energy usage (aligning with EQODEC’s sustainability goals)</p></li>
+<li><p><strong>Energy Efficiency Score (EES)</strong></p></li>
+<li><p><strong>PSNR on the test set</strong></p></li>
+<li><p><strong>Model overhead time</strong></p></li>
+<li><p><strong>Compressed output size</strong></p></li>
+<li><p><strong>Model-attributed kgCO₂ overhead</strong></p></li>
 </ul>
-<p><strong>Improved FFmpeg-Based Streaming I/O</strong></p>
-<p>The EES and evaluation pipeline required robust streaming of 1080p frames from UVG videos. This week introduced:</p>
-<ul class="simple">
-<li><p>New streaming reader using ffmpeg rawvideo pipe</p></li>
-<li><p>Stderr flushing logic to prevent ffmpeg stalls</p></li>
-<li><p>Chunk-based inference to avoid GPU OOM during resolution mismatch</p></li>
-<li><p>Real-time frame-level progress logging</p></li>
-</ul>
-<p>These fixes resolved earlier issues where evaluation appeared “stuck” due to silent ffmpeg buffering.</p>
+<p>This framework is now the analytical backbone for determining whether carbon-aware optimization improves real-world efficiency without sacrificing visual fidelity, as required by the Week 1 project objectives.</p>
 <hr class="docutils" />
 </section>
-<section id="training-progress-and-checkpointing">
-<h2><strong>Training Progress and Checkpointing</strong><a class="headerlink" href="#training-progress-and-checkpointing" title="Link to this heading">#</a></h2>
-<p><strong>Full Training Runs</strong></p>
-<p>The training loop was executed with:</p>
+<section id="refinement-of-the-ees-energy-efficiency-score-evaluation-pipeline">
+<h2><strong>Refinement of the EES (Energy Efficiency Score) Evaluation Pipeline</strong><a class="headerlink" href="#refinement-of-the-ees-energy-efficiency-score-evaluation-pipeline" title="Link to this heading">#</a></h2>
+<p>This week significantly improved the EES system introduced in Week 3 and Week 4.</p>
+<p><strong>Key Enhancements:</strong></p>
 <ul class="simple">
-<li><p>2 epochs (test configuration)</p></li>
-<li><p>Adam optimizer (LR = 1e-4)</p></li>
-<li><p>Batch size 4 (Vimeo septuplets)</p></li>
+<li><p>FFmpeg-based compression is now <strong>streamed via rawvideo pipes</strong>, improving stability compared to earlier iterations.</p></li>
+<li><p>The model and baseline are encoded using distinct CRF settings, enabling meaningful GB-savings measurement.</p></li>
+<li><p>CodeCarbon is integrated at the entire evaluation-run level, attributing carbon cost proportionally to inference and encoding overhead.</p></li>
+<li><p>All temporary videos are automatically cleaned to minimize disk usage.</p></li>
 </ul>
-<p>Both <strong>training and validation PSNR and loss metrics</strong> are now consistently logged per epoch.</p>
-<p>When validation loss improved, the model automatically saved:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">eqodec_best_epochX</span><span class="o">.</span><span class="n">pth</span>
-</pre></div>
-</div>
-<p>This ensures traceability and reproducibility of experiment results.</p>
-<p><strong>Baseline Model Training</strong></p>
-<p>The training loop was executed with:</p>
-<ul class="simple">
-<li><p>2 epochs (test configuration)</p></li>
-<li><p>Adam optimizer (LR = 1e-4)</p></li>
-<li><p>Batch size 4 (Vimeo septuplets)</p></li>
-</ul>
-<p>To prepare for comparative evaluation, a <strong>baseline MSE-only autoencoder</strong> was also trained:</p>
-<ul class="simple">
-<li><p>No carbon proxy</p></li>
-<li><p>Same architecture and hyperparameters</p></li>
-</ul>
-<p>This enables direct comparison of:</p>
-<ul class="simple">
-<li><p>Reconstruction quality</p></li>
-<li><p>Bitrate performance</p></li>
-<li><p>Carbon footprint</p></li>
-<li><p>Final EES scores</p></li>
-</ul>
-<p>as required in Objectives #2 and #3 of the EQODEC plan.</p>
+<p>The resulting EES formulation provides a practical estimate of:</p>
+<p><strong>GB of storage saved per kgCO₂ emitted</strong>
+which directly addresses the sustainability outcomes defined in the Week 1 project significance statement.</p>
+<p>Because evaluation now occurs fully within the Vimeo-90K domain, consistent with the Week 4 methodological shift to avoid UVG overhead, the EES computation is efficient enough to run at multiple epochs and across multiple replicates.</p>
 <hr class="docutils" />
 </section>
-<section id="ees-computation-and-uvg-benchmark">
-<h2><strong>EES Computation and UVG Benchmark</strong><a class="headerlink" href="#ees-computation-and-uvg-benchmark" title="Link to this heading">#</a></h2>
-<p><strong>Energy Efficiency Score (EES)</strong></p>
-<p>A major achievement this week was the <strong>successful deployment of the EES evaluator</strong>, which combines:</p>
+<section id="unified-vimeo-only-benchmarking-strategy">
+<h2><strong>Unified Vimeo-Only Benchmarking Strategy</strong><a class="headerlink" href="#unified-vimeo-only-benchmarking-strategy" title="Link to this heading">#</a></h2>
+<p>Following Week 4’s reasoning that UVG’s raw 1080p YUV sequences were prohibitively expensive for rapid iteration and carbon-aware experimentation, all benchmarking this week was redesigned around Vimeo-90K exclusively:</p>
 <ul class="simple">
-<li><p>Baseline H.264 encoding</p></li>
-<li><p>Model-based reconstruction encoding</p></li>
-<li><p>CodeCarbon-tracked emissions</p></li>
-<li><p>Time-proportional attribution of energy cost</p></li>
-<li><p>Storage size comparison</p></li>
+<li><p>The test split now serves as the definitive benchmark for PSNR and EES.</p></li>
+<li><p>All comparative plots (Loss, PSNR, EES) now rely solely on the Vimeo distribution.</p></li>
+<li><p>Evaluation is fast enough to execute after every training epoch, even across 5 replicates per model.</p></li>
 </ul>
-<p>EES expresses <strong>kgCO₂ saved per GB of compressed video</strong>, fulfilling the project’s requirement to produce a sustainability-oriented metric.</p>
-<p><strong>UVG Benchmark (PSNR)</strong></p>
-<p>A refined evaluation loop now:</p>
+<p>This decision accelerated experimentation, reduced compute waste, and strengthened methodological consistency with EQODEC’s environmental mission.</p>
+<hr class="docutils" />
+</section>
+<section id="visualization-of-training-dynamics-and-sustainability-metrics">
+<h2><strong>Visualization of Training Dynamics and Sustainability Metrics</strong><a class="headerlink" href="#visualization-of-training-dynamics-and-sustainability-metrics" title="Link to this heading">#</a></h2>
+<p>To support interpretability, three major visualization modules were implemented this week:</p>
 <ul class="simple">
-<li><p>Streams UVG 1080p videos</p></li>
-<li><p>Runs chunk-based inference</p></li>
-<li><p>Computes PSNR over full sequences</p></li>
+<li><p><strong>Loss curves (train vs. validation)</strong></p></li>
+<li><p><strong>PSNR progression across epochs</strong></p></li>
+<li><p><strong>EES curves comparing EQODEC vs. Baseline</strong></p></li>
 </ul>
-<p>This high-resolution benchmark is directly connected to the data collection design in Week-1, where UVG was selected for its realism relative to traditional codecs’ limits.</p>
+<p>These plots highlight several insights consistent with Week 4 observations:</p>
+<ul class="simple">
+<li><p>EQODEC maintains or slightly improves PSNR compared to the baseline.</p></li>
+<li><p>EES values show modest but consistent gains for the carbon-aware model.</p></li>
+<li><p>Variance across replicates is reduced due to validation-based checkpointing.</p></li>
+</ul>
+<p>These findings reinforce Week 4’s conclusion that sustainability-aware optimization does not harm visual quality and may provide measurable benefits in energy-efficient compression.</p>
+<hr class="docutils" />
+</section>
+<section id="additional-contributions-frame-reconstruction-export-utility">
+<h2><strong>Additional Contributions: Frame Reconstruction Export Utility</strong><a class="headerlink" href="#additional-contributions-frame-reconstruction-export-utility" title="Link to this heading">#</a></h2>
+<p>A new module was added to generate side-by-side qualitative comparisons of:</p>
+<ul class="simple">
+<li><p>Original frames</p></li>
+<li><p>EQODEC reconstructions</p></li>
+<li><p>Baseline reconstructions</p></li>
+</ul>
+<p>This feature supports visual inspection and future inclusion in the project’s final paper or presentation.</p>
+<hr class="docutils" />
+</section>
+<section id="challenges-encountered">
+<h2><strong>Challenges Encountered</strong><a class="headerlink" href="#challenges-encountered" title="Link to this heading">#</a></h2>
+<p>Several practical challenges were addressed this week:</p>
+<p><strong>1. FFmpeg process stability:</strong> Occasional stalls were fixed by carefully managing stdin closure and suppressing stderr buffering.</p>
+<p><strong>2. GPU memory limits:</strong> Chunk-based inference was extended to both training and evaluation, following lessons learned in Week 3’s inference stability fixes.</p>
+<p><strong>3. Carbon intensity estimation variability:</strong> CodeCarbon’s returned data can vary per machine, so consistent fallback logic was implemented.</p>
+<p><strong>4. Training time explosion during multi-run evaluation:</strong> The exclusive use of Vimeo-90K significantly mitigated this issue, confirming Week 4’s pivot as both necessary and beneficial.</p>
 <hr class="docutils" />
 </section>
 <section id="summary">
 <h2><strong>Summary</strong><a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
-<p>This week’s progress focused on fully stabilizing and optimizing the EQODEC model training pipeline, enabling end-to-end carbon-aware video compression using the Vimeo-90K and UVG datasets. The ConvLSTM autoencoder was successfully integrated with a clean reconstruction–carbon loss formulation, while a standalone CarbonModule ensured flexible computation of the sustainability objective introduced in the project background. Major performance improvements were achieved through Automatic Mixed Precision (AMP), ffmpeg-based streaming optimizations, and chunked 1080p inference, resulting in faster, more energy-efficient training and evaluation. Full training of both the EQODEC model and the MSE-only baseline was completed, with automatic checkpointing and consistent PSNR tracking. Additionally, the Energy Efficiency Score (EES) evaluator and UVG benchmark were fully operational, enabling realistic high-resolution testing and carbon-footprint assessment. Overall, this week established a stable, efficient, and carbon-aware training and evaluation workflow, marking a significant advancement toward EQODEC’s sustainability-centered objectives.</p>
+<p>Week 5 represents the final stabilization and maturation phase of the EQODEC project. The entire end-to-end pipeline, including data loading, model architecture, carbon-aware training, multi-run evaluation, EES benchmarking, visualization, and qualitative comparison, has now been fully implemented and operationalized. This expands on the foundational dataset work from Weeks 1–3 and the early evaluation methodology from Week 4, creating a complete experimental ecosystem capable of supporting rigorous scientific analysis.</p>
+<p>Despite shifting to a Vimeo-only evaluation strategy, the results this week continue to support a key emerging conclusion also observed in Week 4:
+<strong>carbon-aware optimization does not degrade compression quality and may improve sustainability performance.</strong></p>
+<p>With the full framework complete and all core objectives achieved, this week concludes the primary development cycle of EQODEC. The system is now ready for final documentation, result interpretation, and integration into the project’s final research output.</p>
 </section>
 </section>
 
@@ -581,7 +563,7 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="project2-2.html"
+       href="project2-4.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
@@ -590,11 +572,11 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="project2-4.html"
+       href="../Blogs/blog1.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><strong>EQODEC: A Carbon-Aware Deep Learning Framework for Sustainable Video Compression</strong></p>
+        <p class="prev-next-title"><strong>Sometimes It’s Okay to Forget Stuff (Understanding Dropout in Neural Networks)</strong></p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -614,10 +596,13 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-training-pipeline-improvements"><strong>Model Training Pipeline Improvements</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#performance-optimization-and-runtime-stability"><strong>Performance Optimization and Runtime Stability</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training-progress-and-checkpointing"><strong>Training Progress and Checkpointing</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ees-computation-and-uvg-benchmark"><strong>EES Computation and UVG Benchmark</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#finalization-of-the-end-to-end-eqodec-framework"><strong>Finalization of the End-to-End EQODEC Framework</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#full-implementation-of-the-robust-multi-run-evaluation-engine"><strong>Full Implementation of the Robust Multi-Run Evaluation Engine</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#refinement-of-the-ees-energy-efficiency-score-evaluation-pipeline"><strong>Refinement of the EES (Energy Efficiency Score) Evaluation Pipeline</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unified-vimeo-only-benchmarking-strategy"><strong>Unified Vimeo-Only Benchmarking Strategy</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualization-of-training-dynamics-and-sustainability-metrics"><strong>Visualization of Training Dynamics and Sustainability Metrics</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-contributions-frame-reconstruction-export-utility"><strong>Additional Contributions: Frame Reconstruction Export Utility</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#challenges-encountered"><strong>Challenges Encountered</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary"><strong>Summary</strong></a></li>
 </ul>
   </nav></div>
