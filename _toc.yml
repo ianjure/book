@@ -27,7 +27,7 @@ parts:
           - file: Projects/project1.ipynb
             title: Project 1
           - file: Projects/project2.ipynb
-            title: Final Project
+            title: Project 2
             sections:
                 - file: Projects/project2-1.ipynb
                   title: Week 1
